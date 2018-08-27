@@ -2,6 +2,6 @@ version: '3.4'
 
 services:
   apigateway:
-    image: registry.cn-shenzhen.aliyuncs.com/creekdream/apigateway:1.0.0
+    image: registry.cn-shenzhen.aliyuncs.com/creekdream/apigateway:0.1.0
     environment:
       - ASPNETCORE_ENVIRONMENT=Production

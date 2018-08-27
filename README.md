@@ -74,9 +74,11 @@ _在配置中心配置如下图所示：_
 ## 构建Docker镜像与启动项目
 ### 一、构建Docker镜像
 ``` bash
-
+git clone https://github.com/zengqinglei/Creekdream.ApiGateway.git
+cd Creekdream.ApiGateway/src/Creekdream.ApiGateway
+docker build -t registry.cn-shenzhen.aliyuncs.com/creekdream/apigateway:0.1.0 .
 ```
 ### 二、 运行Docker镜像
 ``` bash
-
+docker run -d --name=creekdream-apigateway --restart=always --network=host -e ENVIRONMENT=Production -e URLS=http://0.0.0.0:53211 -e MetaServer=http://192.168.0.103:8080 registry.cn-shenzhen.aliyuncs.com/creekdream/apigateway:0.1.0
 ```
