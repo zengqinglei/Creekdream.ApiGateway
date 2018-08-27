@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  apigateway:
+    container_name: apigateway
+    image: creekdream/apigateway:${TAG:-latest}
+    network_mode: host
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:53211
+    ports:
+      - "53211:53211"

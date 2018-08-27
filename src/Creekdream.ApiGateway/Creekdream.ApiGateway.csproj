@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <DockerTargetOS>Linux</DockerTargetOS>
+    <UserSecretsId>898803ce-7487-4938-8132-5ba7518ccaae</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Ocelot" Version="10.0.4" />
+    <PackageReference Include="Ocelot.Provider.Consul" Version="0.1.0" />
+    <PackageReference Include="Creekdream.Configuration.Apollo" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>
