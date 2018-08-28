@@ -8,7 +8,7 @@
 ``` json
 {
   "apollo": {
-    "AppId": "Creekdream.ApiGateway",
+    "AppId": "PublicService",
     "MetaServer": "http://127.0.0.1:8080",
     "Namespaces": [ "application" ]
   }
@@ -84,6 +84,7 @@ docker run -d --name=creekdream-apigateway \
     --restart=always --network=host \
     -e 'ASPNETCORE_ENVIRONMENT=Production' \
     -e 'ASPNETCORE_URLS=http://0.0.0.0:53211' \
-    -e 'MetaServer=http://192.168.0.103:8080' \
+    -e 'apollo:AppId=PublicService' \
+    -e 'apollo:MetaServer=http://192.168.0.103:8080' \
     registry.cn-shenzhen.aliyuncs.com/creekdream/apigateway:0.1.0
 ```
