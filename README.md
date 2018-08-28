@@ -16,7 +16,7 @@
 ```
 _在配置中心配置如下图所示：_
 
-![image](https://user-images.githubusercontent.com/7374317/44671589-803b1600-aa58-11e8-810d-06fa56fb8fc5.png)
+![image](https://user-images.githubusercontent.com/7374317/44725672-796bdc00-ab08-11e8-9942-5a2ecd6f954c.png)
 
 ### 二、 Ocelot 的配置示例，也可参照[官方文档](https://ocelot.readthedocs.io/en/latest/features/configuration.html)
 ``` json
