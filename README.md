@@ -2,11 +2,13 @@
 
 项目结合Ocelot与Consul之间通讯进行服务发现或手动配置路由转发请求至各个服务，还新增Skywalking支持服务性能监控与追踪，项目提供了多种配置方式。
 
-## 使用配置文件配置Ocelot
+[升级日志](https://github.com/zengqinglei/Creekdream.ApiGateway/releases)
+
+### 使用配置文件配置Ocelot
 
 完整配置方式，请参照官方文档：https://ocelot.readthedocs.io/en/latest/features/configuration.html
 
-### 手动路由配置示例
+#### 1. 手动路由配置示例
 ``` json
 // appsettings.json 配置示例
 {
@@ -26,7 +28,7 @@
 }
 ```
 
-### 配置Consul服务发现
+#### 2.配置Consul服务发现
 ``` json
 // appsettings.json 配置示例
 {
@@ -41,11 +43,11 @@
 }
 ```
 
-## 结合携程阿波罗配置中心配置
+### 结合携程阿波罗配置中心配置
 
 携程Apollo的使用请参考项目：https://github.com/zengqinglei/Creekdream.Configuration.Apollo
 
-### 可将appsetting中的ocelot配置转移至配置中心
+#### 可将appsetting中的ocelot配置转移至配置中心
 ``` json
 // appsettings.json 配置示例
 {
