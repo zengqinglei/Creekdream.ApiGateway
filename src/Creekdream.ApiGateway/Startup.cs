@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Consul;
+using SkyWalking.AspNetCore;
 
 namespace Creekdream.ApiGateway
 {
@@ -26,6 +27,21 @@ namespace Creekdream.ApiGateway
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOcelot().AddConsul();
+
+            var directServers = _configuration.GetValue<string>("SkyWalking:DirectServers");
+            var applicationCode = _configuration.GetValue<string>("SkyWalking:ApplicationCode");
+            if (!string.IsNullOrEmpty(directServers))
+            {
+                if (string.IsNullOrEmpty(applicationCode))
+                {
+                    applicationCode = _configuration.GetValue<string>("AuthorizationCenter:AppKey");
+                }
+                services.AddSkyWalking(options =>
+                {
+                    options.ApplicationCode = applicationCode;
+                    options.DirectServers = directServers;
+                });
+            }
         }
 
         /// <summary>

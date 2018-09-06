@@ -1,11 +1,53 @@
 # API网关项目
 
-项目结合Ocelot与Consul之间通讯进行服务发现或手动配置路由转发请求至各个服务。
+项目结合Ocelot与Consul之间通讯进行服务发现或手动配置路由转发请求至各个服务，还新增Skywalking支持服务性能监控与追踪，项目提供了多种配置方式。
 
-## 配置项目
-提供以下两种配置方式
-### 一、 在appsettings.json 中配置Apollo配置中心服务
+## 使用配置文件配置Ocelot
+
+完整配置方式，请参照官方文档：https://ocelot.readthedocs.io/en/latest/features/configuration.html
+
+### 手动路由配置示例
 ``` json
+// appsettings.json 配置示例
+{
+  "ReRoutes": [
+    {
+      "ServiceName": "UserService",
+      "UpstreamPathTemplate": "/userService/{url}",
+      "DownstreamPathTemplate": "/api/{url}",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT", "OPTIONS" ]
+    }
+  ],
+  "GlobalConfiguration":{}
+}
+```
+
+### 配置Consul服务发现
+``` json
+// appsettings.json 配置示例
+{
+  "ReRoutes": [],
+  "GlobalConfiguration": {
+    "BaseUrl": null,
+    "ServiceDiscoveryProvider": {
+      "Host": "127.0.0.1",
+      "Port": 8500
+    }
+  }
+}
+```
+
+## 结合携程阿波罗配置中心配置
+
+携程Apollo的使用请参考项目：https://github.com/zengqinglei/Creekdream.Configuration.Apollo
+
+### 可将appsetting中的ocelot配置转移至配置中心
+``` json
+// appsettings.json 配置示例
 {
   "apollo": {
     "AppId": "PublicService",
@@ -14,71 +56,20 @@
   }
 }
 ```
-_在配置中心配置如下图所示：_
-
 ![image](https://user-images.githubusercontent.com/7374317/44725672-796bdc00-ab08-11e8-9942-5a2ecd6f954c.png)
 
-### 二、 Ocelot 的配置示例，也可参照[官方文档](https://ocelot.readthedocs.io/en/latest/features/configuration.html)
-``` json
-{
-  "ReRoutes": [
-    {
-      "ServiceName": "UserService",
-      "UpstreamPathTemplate": "/userService/{url}",
-      "DownstreamPathTemplate": "/api/{url}",
-      "DownstreamScheme": "http",
-      "UseServiceDiscovery": true,
-      "LoadBalancerOptions": {
-        "Type": "LeastConnection"
-      },
-      "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT", "OPTIONS" ]
-    },
-    {
-      "ServiceName": "ProductService",
-      "UpstreamPathTemplate": "/productService/{url}",
-      "DownstreamPathTemplate": "/api/{url}",
-      "DownstreamScheme": "http",
-      "UseServiceDiscovery": true,
-      "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT", "OPTIONS" ],
-      "RateLimitOptions": {
-        "ClientIdHeader": "client_id", // 用来识别客户端的请求头，默认是 ClientId
-        "QuotaExceededMessage": "Too many requests, are you OK?", // 当请求过载被截断时返回的消息
-        "RateLimitCounterPrefix": "ocelot",
-        "DisableRateLimitHeaders": false, // Http头  X-Rate-Limit 和 Retry-After 是否禁用
-        "HttpStatusCode": 429 // 当请求过载被截断时返回的http status
-      },
-      "QoSOptions": {
-        "ExceptionsAllowedBeforeBreaking": 3,
-        "DurationOfBreak": 10000,
-        "TimeoutValue": 5000
-      },
-      "LoadBalancerOptions": {
-        "Type": "LeastConnection"
-      }
-    }
-  ],
-  "GlobalConfiguration": {
-    "BaseUrl": null,
-    "ServiceDiscoveryProvider": {
-      "Host": "127.0.0.1",
-      "Port": 8500
-    },
-    "HttpHandlerOptions": {
-      "AllowAutoRedirect": false,
-      "UseCookieContainer": false,
-      "UseTracing": false
-    }
-  }
-}
-```
 ## 构建Docker镜像与启动项目
+
 ### 一、构建Docker镜像
+
 ``` bash
 git clone https://github.com/zengqinglei/Creekdream.ApiGateway.git
 cd Creekdream.ApiGateway/src/Creekdream.ApiGateway
-docker build -t registry.cn-shenzhen.aliyuncs.com/creekdream/apigateway:0.1.0 .
+docker build -t registry.cn-shenzhen.aliyuncs.com/creekdream/apigateway:0.1.1 .
 ```
+
 ### 二、 运行Docker镜像
+
 ``` bash
 docker run -d --name=creekdream-apigateway \
     --restart=always --network=host \

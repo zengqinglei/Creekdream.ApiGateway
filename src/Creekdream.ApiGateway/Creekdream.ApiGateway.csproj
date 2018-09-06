@@ -8,9 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Ocelot" Version="10.0.4" />
-    <PackageReference Include="Ocelot.Provider.Consul" Version="0.1.0" />
+    <PackageReference Include="Ocelot" Version="11.0.2" />
+    <PackageReference Include="Ocelot.Provider.Consul" Version="0.1.2" />
     <PackageReference Include="Creekdream.Configuration.Apollo" Version="1.0.0" />
+    <PackageReference Include="SkyWalking.AspNetCore" Version="0.3.0" />
   </ItemGroup>
 
 </Project>

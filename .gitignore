@@ -259,3 +259,7 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+# 
+src/Creekdream.ApiGateway/Properties/PublishProfiles/Debug.pubxml*
+src/Creekdream.ApiGateway/Properties/PublishProfiles/FolderProfile*.pubxml*
