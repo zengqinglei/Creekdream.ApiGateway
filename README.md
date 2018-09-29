@@ -4,6 +4,15 @@
 
 [升级日志](https://github.com/zengqinglei/Creekdream.ApiGateway/releases)
 
+## 支持如下特性
+1. 服务发现
+2. 负载、熔断、限流、降级
+3. 基于IdentityServer的授权认证
+4. 服务监控追踪
+5. 可使用携程Apollo配置中心接管配置
+
+以上特性均可选配置。
+
 ### 使用配置文件配置Ocelot
 
 完整配置方式，请参照官方文档：https://ocelot.readthedocs.io/en/latest/features/configuration.html
